@@ -7,7 +7,7 @@ const TaskList = (props) => {
         <div className='task-list'>
         {
             props.tasks.map( (task) => (
-                <Task />
+                <Task task = {task}/>
             ))
         }
         </div>

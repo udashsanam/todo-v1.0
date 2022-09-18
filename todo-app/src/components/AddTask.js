@@ -1,27 +1,46 @@
-import './AddTask.css';
+import { useState } from "react";
+import "./AddTask.css";
 
+const AddTask = ( props ) => {
+  const [selectedTitle, setSelectedTitle] = useState("");
+  const [selectedDate, setSelectedDate] = useState(new Date(2022, 9, 18));
+  const [selectedDescription, setSelectedDescription] = useState("");
 
-const AddTask = () => {
-
-    const addTask = (event) => {
-        event.preventDefault();
-            console.log(event);
+  const onSubmitHandler = (event) => {
+    event.preventDefault();
+    console.log(selectedTitle);
+    console.log(selectedDescription);
+    const  task = {
+        title: selectedTitle,
+        description : selectedDescription
     }
-    return (
+    props.addTaskHandler(task);
+  };
+  const ontitleChangeHandler = (event) => {
+    
+    setSelectedTitle(event.target.value);
+  };
+  const onDateChangeHandler = (event) => {
+    setSelectedDate(new Date(event.target.value));
+  };
 
-        <div className="add-task">
-            <form>
-            <label className='input-label'> Date: </label>
-            <input  type="date" />
-            <label className='input-label'> Title: </label>
-            <input  type="text" />
-            <br/>
-            <br/>
-            <label className='description'> Description: </label>
-            <input  type="text" />
-            <button onSubmit={addTask}> submit</button>
-            </form>
-        </div>
-    )
-}
+  const onDescriptionChangeHandler = (event) => {
+        setSelectedDescription(event.target.value);
+  };
+  return (
+    <div className="add-task">
+      <form onSubmit={onSubmitHandler}>
+        <label className="input-label"> Date: </label>
+        <input type="date" onChange={onDateChangeHandler} />
+        <label className="input-label"> Title: </label>
+        <input type="text" onChange={ontitleChangeHandler} />
+        <br />
+        <br />
+        <label className="description"> Description: </label>
+        <input type="text" onChange={onDescriptionChangeHandler}/>
+        <button type="submit"> submit</button>
+      </form>
+    </div>
+  );
+};
 export default AddTask;

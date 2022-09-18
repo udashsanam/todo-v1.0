@@ -1,12 +1,12 @@
 import './Task.css';
 
-const Task = () => {
+const Task = (props) => {
     
     return (
         <div className='task'>
-            <h1 className='title'> title </h1>
+            <h1 className='title'> {props.task.title} </h1>
             <h2 className="date"> { new Date().toISOString()}</h2>
-            <p> this is the task description </p> 
+            <p> {props.task.description}</p> 
         </div>
     )
 }
